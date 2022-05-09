@@ -12,9 +12,6 @@ public class TwoSum {
         System.out.println(Arrays.toString(twoSum2(myArray, 9)));
         System.out.println("Two Pointer Solution");
         System.out.println(Arrays.toString(twoSumTwoPointer(myArray, 9)));
-
-
-
     }
 
     public static int[] twoSum1(int[] array, int target) {
@@ -39,7 +36,7 @@ public class TwoSum {
             if (map.containsKey(potentialMatch)) return new int[]{i, map.get(potentialMatch)};
             else map.put(array[i], i);
         }
-        return new int[]{};
+        return new int[]{-1, -1};
     }
 
     //
