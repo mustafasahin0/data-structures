@@ -11,7 +11,7 @@ public class TwoSum {
         System.out.println("Optimal Solution");
         System.out.println(Arrays.toString(twoSum2(myArray, 9)));
         System.out.println("Two Pointer Solution");
-        System.out.println(Arrays.toString(twoSUmTwoPointer(myArray, 9)));
+        System.out.println(Arrays.toString(twoSumTwoPointer(myArray, 9)));
 
 
 
@@ -44,7 +44,7 @@ public class TwoSum {
 
     //
 
-    public static int[] twoSUmTwoPointer(int[] array, int target) {
+    public static int[] twoSumTwoPointer(int[] array, int target) {
         //Sort the array
         Arrays.sort(array);
         //Define two index pointers i and j
