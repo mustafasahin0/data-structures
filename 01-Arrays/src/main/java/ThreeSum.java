@@ -1,41 +1,68 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class ThreeSum {
-
     public static void main(String[] args) {
-        System.out.println("twoSumTwoPointer(new int[]{1, 3, 4, 5, 1, -2, -4, -1}, 2).toString() = " + twoSumTwoPointer(new int[]{1, 3, 4, 5, 1, -2, -4, -1}, 2).toString());
+        int[] array = new int[]{12, 3, 1, 2, -6, 5, -8, 6};
+        System.out.println("Printing Solution with two pointers...");
+        threeNumberSum1(array, 6).forEach(System.out::println);
+        System.out.println("Printing Solution with two pointers...");
+        threeNumberSum2(array, 6).forEach(System.out::println);
     }
 
-    public static List<List<Integer>> twoSumTwoPointer(int[] array, int target) {
-        Arrays.sort(array);
-        List<List<Integer>> result = new ArrayList<>();
+    // O(n^2) time | O(n) space
+    // this is a two pointer solution, for every i
+    // running two pointer solution as in the two sum problem
+    public static List<List<Integer>> threeNumberSum1(int[] array, int targetSum) {
+
+        Arrays.sort(array); //nlog(n)
+        List<List<Integer>> triplets = new ArrayList<>();
+
         for (int i = 0; i < array.length - 2; i++) {
-            if (i > 0 && array[i - 1] == array[i]) {
-                continue;
-            }
+            //Reset left and right pointer
             int left = i + 1;
             int right = array.length - 1;
             while (left < right) {
-                int sum = array[i] + array[left] + array[right];
-                if (sum == target) {
-                    result.add(Arrays.asList(array[i], array[left], array[right]));
-                    while (left < right && array[left] == array[left + 1]) {
-                        left++;
-                    }
-                    while (left < right && array[right] == array[right - 1]) {
-                        right--;
-                    }
+                int currentSum = array[i] + array[left] + array[right];
+                if (currentSum == targetSum) {
+
+                    triplets.add(Arrays.asList(array[i], array[left], array[right]));
                     left++;
                     right--;
-                } else if (sum > target) {
-                    right--;
+                } else if (currentSum < targetSum) {
+                    left++;
                 } else {
-                    left++;
+                    right--;
                 }
             }
         }
-        return result;
+        return triplets;
+    }
+
+    //HashMap solution for 3Sum problem.
+    // Overall complexity is: nlog(n) + n + O(n^2) = O(n^2)
+    public static List<List<Integer>> threeNumberSum2(int[] nums, int target) {
+        Set<List<Integer>> result = new HashSet();
+        HashMap<Integer, Integer> map = new HashMap(); // Space
+        Arrays.sort(nums);  // O(nlogn)
+
+        // Put all numbers in a HashMap to create a look up table
+        for (int i = 0; i < nums.length; i++) {
+            map.put(nums[i], i);   //O(n)
+        }
+        // In a nested loop try to find a match for each pair
+        //  from hash map that adds up to target value
+        for (int i = 0; i < nums.length - 1; i++) {   // O(n^2)
+            for (int j = i + 1; j < nums.length; j++) {
+                List<Integer> triplet = new ArrayList();
+                int potentialMatch = target - nums[i] - nums[j];
+                if (map.containsKey(potentialMatch) && map.get(potentialMatch) > j) {
+                    triplet.add(nums[i]);
+                    triplet.add(nums[j]);
+                    triplet.add(potentialMatch);
+                    result.add(triplet);//set to prevent duplicates
+                }
+            }
+        }
+        return new ArrayList(result);
     }
 }
