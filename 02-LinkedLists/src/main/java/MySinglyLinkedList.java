@@ -132,5 +132,34 @@ public class MySinglyLinkedList {
         }
     }
 
+    //Assignment 3 Remove Duplicated values from Singly Linked List
+    // O(n) time | O(1) space where n is the number os ndes in the linked list
+    void removeDuplicatesFromLinkedList() {
+        Node current = head;
+        while (current != null) {
+            Node nextDistinctNode = current.next;
+            while (nextDistinctNode != null && nextDistinctNode.value == current.value) {
+                nextDistinctNode = nextDistinctNode.next;
+            }
+            current.next = nextDistinctNode;
+            current = nextDistinctNode;
+        }
+    }
+    // Assignment 4 Reverse the Nodes of Singly Linked List in one pass
+    public void reverse() {
+        if(isEmpty()) return;
+        Node previous = head;
+        Node current = head.next;
 
+        while (current != null) {
+            Node nextNode = current.next;
+            current.next = previous;
+            previous = current;
+            current = nextNode;
+        }
+
+        tail = head;
+        tail.next = null;
+        head = previous;
+    }
 }

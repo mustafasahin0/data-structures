@@ -1,9 +1,10 @@
 public class MyNode {
 
-    String name;
+    String value;
     MyNode next; //default value will be null
 
     public MyNode(String name){
-        this.name = name;
+        this.value = name;
+        this.next = null;
     }
 }
