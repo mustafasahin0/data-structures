@@ -16,7 +16,6 @@ public class Assignment7FindFirstRepeatedChar {
             if(set.contains(ch)) return ch;
             set.add(ch);
         }
-
         return Character.MIN_VALUE;
     }
 }
