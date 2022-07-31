@@ -9,12 +9,13 @@ public class AlgoQuestion3MergeIntervals {
     }
 
     public static int[][] mergeIntervals(int[][] intervals) {
+        // O(n(log(n)
         int[][] sortedIntervals = intervals.clone();
         Arrays.sort(sortedIntervals, (a, b) -> Integer.compare(a[0], b[0]));
         List<int[]> mergedIntervals = new ArrayList<>();
         int[] currentInterval = sortedIntervals[0];
         mergedIntervals.add(currentInterval);
-
+        // O(n)
         for (int[] nextInterval : sortedIntervals) {
             int currentIntervalEnd = currentInterval[1];
             int nextIntervalStart = nextInterval[0];
@@ -28,5 +29,6 @@ public class AlgoQuestion3MergeIntervals {
             }
         }
         return mergedIntervals.toArray(new int[mergedIntervals.size()][]);
+        // Total O(n(log(n)) + O(n) = O(nlog(n)
     }
 }
