@@ -4,7 +4,6 @@ public class Node {
     int value;
 
     public Node() {
-
     }
 
     public Node(int value) {
