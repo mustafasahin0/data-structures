@@ -131,5 +131,5 @@ public class MyTree {
         System.out.println(sums);
         return sums + nodeDepthSums(node.leftChild, sums + 1) + nodeDepthSums(node.rightChild, sums + 1);
     }
-    // Assignment 8 Calculate Sum of Node Depths
+
 }
